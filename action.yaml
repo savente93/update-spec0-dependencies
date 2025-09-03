@@ -15,8 +15,8 @@ inputs:
     required: true
     default: true
   schedule_path:
-    description: "Path to the schedule.json file. If missing, it will be downloaded from the latest release of savente93/SPEC0-schedule"
-    default: schedule.json
+    description: "Path to the schedule.json file relative to the project root. If missing, it will be downloaded from the latest release of savente93/SPEC0-schedule"
+    default: "schedule.json"
   token:
     description: "GitHub token with repo permissions to create pull requests"
     required: true
@@ -37,11 +37,12 @@ runs:
       shell: bash
       env:
         SCHEDULE_FILE: ${{ inputs.schedule_path }}
+        GH_TOKEN: ${{ inputs.token }}
       run: |
         set -e
-        if [ ! -f "$SCHEDULE_FILE" ]; then
+        if [ ! -f "${{ github.workspace }}/$SCHEDULE_FILE" ]; then
           echo "Downloading schedule.json from latest release..."
-          gh release download -R "savente93/SPEC0-schedule" --pattern schedule.json -O "$SCHEDULE_FILE"
+          gh release download -R "savente93/SPEC0-schedule" --pattern schedule.json -O "${{ github.workspace }}/$SCHEDULE_FILE"
         else
           echo "Schedule file already exists at $SCHEDULE_FILE"
         fi
@@ -57,9 +58,11 @@ runs:
       run: |
         set -e
         echo "Updating ${{inputs.project_file_name}} using schedule ${{inputs.schedule_path}}"
-        pixi run --manifest-path ${{ github.action_path }}/pyproject.toml update-dependencies  "${{ github.workspace }}/${{ inputs.project_file_name }}" "${{ inputs.schedule_path }}"
-        # Clean up schedule file so it does not appear in PR
-        rm "${{ inputs.schedule_path }}"
+        pixi run --manifest-path ${{ github.action_path }}/pyproject.toml update-dependencies  "${{ github.workspace }}/${{ inputs.project_file_name }}" "${{ github.workspace }}/${{ inputs.schedule_path }}"
+        if [ ! "$(git ls-files --error-unmatch ${{ github.workspace }}/${{ inputs.schedule_path }})" ]; then
+          # Clean up schedule file so it does not appear in PR but only if it wasn't tracked before
+          rm -f "${{ github.workspace }}/${{ inputs.schedule_path }}"
+        fi
 
     - name: Show changes (dry-run)
       if: ${{ inputs.create_pr != 'true' }}
