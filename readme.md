@@ -32,7 +32,7 @@ jobs:
     steps:
       - uses: savente93/update-spec0-dependencies@v1
         with:
-          token: ${{ secrets.GH_PAT }}
+          token: ${{ secrets.GH_PAT }} # <- GH_PAT you will have to configure in the repo as a secret
 ```
 
 It should update any of the packages listed in the `dependency`, or `tool.pixi.*` tables. For examples of before and after you can see [./tests/test_data/pyproject.toml](./tests/test_data/pyproject.toml) and [./tests/test_data/pyproject_updated.toml](./tests/test_data/pyproject_updated.toml) respectively. Other tools are not yet supported, but I am open to feature requests.
