@@ -53,7 +53,7 @@ The newest lower bounds will be downloaded from [https://github.com/savente93/SP
 ## Limitations
 
 1. Since this action simply parses the toml to do the upgrade and leaves any other bounds intact, it is possible that the environment of the PR becomes unsolvable.
-   For example if you have a numpy dependency like so: `numpy = ">=1.25.0,<2"` this will get updated in the PR to `numpy = "2.0.0,<2"` which is infeasible. 
+   For example if you have a numpy dependency like so: `numpy = ">=1.25.0,<2"` this will get updated in the PR to `numpy = ">=2.0.0,<2"` which is infeasible. 
    Keeping the resulting environment solvable is outside the scope of this action, so you might have to adjust them manually.
 2. Currently only `pyproject.toml` is supported by this action, though other manifest files could be considered upon request. 
 
