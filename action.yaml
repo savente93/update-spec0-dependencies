@@ -23,9 +23,6 @@ inputs:
 
 runs:
   using: "composite"
-  permissions:
-    contents: write
-    pull-requests: write
   steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -60,7 +57,7 @@ runs:
       run: |
         set -e
         echo "Updating ${{inputs.project_file_name}} using schedule ${{inputs.schedule_path}}"
-        python ${{ github.action_path }}/spec0-update.py "${{ github.workspace }}/${{ inputs.project_file_name }}" "${{ inputs.schedule_path }}"
+        pixi run --manifest-path ${{ github.action_path }}/pyproject.toml update-dependencies  "${{ github.workspace }}/${{ inputs.project_file_name }}" "${{ inputs.schedule_path }}"
         # Clean up schedule file so it does not appear in PR
         rm "${{ inputs.schedule_path }}"
 
