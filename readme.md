@@ -42,12 +42,13 @@ The newest lower bounds will be downloaded from [https://github.com/savente93/SP
 
 ### Parameters
 
-| Input               | Required | Default            | Description                                                   |
-| ------------------- | -------- | ------------------ | ------------------------------------------------------------- |
-| token               | yes      | —                  | Personal access token with `contents` & `pull-request` scopes |
-| project\_file\_name | no       | `"pyproject.toml"` | File to update dependencies in                                |
-| target\_branch      | no       | `"main"`           | Branch to open PR against                                     |
-| create_pr           | no       | `true`   |     open a PR with new versions | 
+| Input               | Required | Default            | Description                                                                    |
+| ------------------- | -------- | ------------------ | -------------------------------------------------------------------------------|
+| token               | yes      | —                  | Personal access token with `contents` & `pull-request` scopes                  |
+| project\_file\_name | no       | `"pyproject.toml"` | File to update dependencies in                                                 |
+| schedule\_path      | no       | `"schedule.json"`  | path to schedule json data. only relevant if you have it commited in your repo |
+| target\_branch      | no       | `"main"`           | Branch to open PR against                                                      |
+| create_pr           | no       | `true`             | Open a PR with new versions                                                    |
 
 
 ## Limitations
