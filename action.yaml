@@ -78,3 +78,7 @@ runs:
         body: "This PR was created automatically"
         base: ${{ inputs.target_branch }}
         branch: update-spec0-dependencies-${{ github.run_id }}
+
+branding:
+  icon: 'check-square'
+  color: 'blue'
