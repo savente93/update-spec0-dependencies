@@ -9,6 +9,7 @@ def test_parsing_correct():
     assert SpecifierSet(">4,<9") == parse_version_spec(">4, <9")
     assert SpecifierSet(">=4") == parse_version_spec(">=4")
     assert SpecifierSet(">=2025.7") == parse_version_spec(">=2025.7")
+    assert SpecifierSet("==3.11.*") == parse_version_spec("3.11.*")
 
 
 def test_parsing_incorrect():

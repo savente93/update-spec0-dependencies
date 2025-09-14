@@ -32,6 +32,14 @@ def parse_version_spec(s: str) -> SpecifierSet:
         try:
             ver = Version(s)
         except InvalidVersion:
+            if "*" in s:
+                # pixi sometimes uses things like python = "3.11.*"
+                try:
+                    return SpecifierSet(f"=={s}")
+                except InvalidVersion:
+                    # if we don't return later raise is the same
+                    pass
+
             raise ValueError(f"{s} is not a version or specifyer")
 
         return SpecifierSet(f">={ver}")

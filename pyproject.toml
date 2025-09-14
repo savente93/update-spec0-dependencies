@@ -29,3 +29,6 @@ pytest = "*"
 
 [tool.pixi.environments]
 test = ["test"]
+
+[tool.pixi.dependencies]
+packaging = ">=25.0,<26"
