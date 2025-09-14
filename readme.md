@@ -30,7 +30,7 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - uses: savente93/update-spec0-dependencies@v1.0.0-alpha.4
+      - uses: savente93/update-spec0-dependencies@v1.0.0
         with:
           token: ${{ secrets.GH_PAT }} # <- GH_PAT you will have to configure in the repo as a secret
 ```
