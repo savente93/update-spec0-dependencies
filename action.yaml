@@ -14,6 +14,10 @@ inputs:
     description: "Whether the action should open a PR or not. Set to false for dry-run/testing."
     required: true
     default: true
+  pr_title: 
+    description: "The title of the PR that will be opened. by default 'Drop support for unsupported packages conform SPEC 0'. has no effect if `create_pr` is set to false"
+    required: false
+    default: "chore: Drop support for unsupported packages conform SPEC 0"
   schedule_path:
     description: "Path to the schedule.json file relative to the project root. If missing, it will be downloaded from the latest release of savente93/SPEC0-schedule"
     default: "schedule.json"
@@ -76,7 +80,7 @@ runs:
       uses: peter-evans/create-pull-request@v6
       with:
         token: ${{ inputs.token }}
-        commit-message: "chore: Drop support for unsupported packages conform SPEC 0"
+        commit-message: ${{ inputs.pr_title }}
         title: "Drop support for unsupported packages conform SPEC 0"
         body: "This PR was created automatically"
         base: ${{ inputs.target_branch }}

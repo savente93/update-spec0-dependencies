@@ -30,7 +30,7 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - uses: savente93/update-spec0-dependencies@v1.0.0-alpha.3
+      - uses: savente93/update-spec0-dependencies@v1.0.0-alpha.4
         with:
           token: ${{ secrets.GH_PAT }} # <- GH_PAT you will have to configure in the repo as a secret
 ```
@@ -46,9 +46,10 @@ The newest lower bounds will be downloaded from [https://github.com/savente93/SP
 | ------------------- | -------- | ------------------ | -------------------------------------------------------------------------------|
 | token               | yes      | —                  | Personal access token with `contents` & `pull-request` scopes                  |
 | project\_file\_name | no       | `"pyproject.toml"` | File to update dependencies in                                                 |
-| schedule\_path      | no       | `"schedule.json"`  | path to schedule json data. only relevant if you have it commited in your repo |
+| schedule\_path      | no       | `"schedule.json"`  | path to schedule json data. only relevant if you have it committed in your repo |
 | target\_branch      | no       | `"main"`           | Branch to open PR against                                                      |
 | create_pr           | no       | `true`             | Open a PR with new versions                                                    |
+| pr_title            | no       | `chore: Drop support for unsupported packages conform SPEC 0`             | The title of the PR that will be opened                                                    |
 
 
 ## Limitations
