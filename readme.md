@@ -50,6 +50,7 @@ The newest lower bounds will be downloaded from [https://github.com/savente93/SP
 | target\_branch      | no       | `"main"`           | Branch to open PR against                                                      |
 | create_pr           | no       | `true`             | Open a PR with new versions                                                    |
 | pr_title            | no       | `chore: Drop support for unsupported packages conform SPEC 0`             | The title of the PR that will be opened                                                    |
+| commit_msg            | no       | `chore: Drop support for unsupported packages conform SPEC 0`             | Commit message of the commit to update the versions.                                                     |
 
 
 ## Limitations

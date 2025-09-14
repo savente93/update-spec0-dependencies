@@ -14,6 +14,10 @@ inputs:
     description: "Whether the action should open a PR or not. Set to false for dry-run/testing."
     required: true
     default: true
+  commit_msg: 
+    description: "Commit message for the commit to update the versions. by default 'Drop support for unsupported packages conform SPEC 0'. has no effect if `create_pr` is set to false"
+    required: false
+    default: "chore: Drop support for unsupported packages conform SPEC 0"
   pr_title: 
     description: "The title of the PR that will be opened. by default 'Drop support for unsupported packages conform SPEC 0'. has no effect if `create_pr` is set to false"
     required: false
@@ -80,8 +84,8 @@ runs:
       uses: peter-evans/create-pull-request@v6
       with:
         token: ${{ inputs.token }}
-        commit-message: ${{ inputs.pr_title }}
-        title: "Drop support for unsupported packages conform SPEC 0"
+        commit-message: ${{ inputs.commit_msg }}
+        title: ${{ inputs.pr_title }}
         body: "This PR was created automatically"
         base: ${{ inputs.target_branch }}
         branch: update-spec0-dependencies-${{ github.run_id }}
